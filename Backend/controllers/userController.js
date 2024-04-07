@@ -2,20 +2,17 @@ const userModel = require('../models/UserModels')
 const { createJSONWebToken } = require('../util/authToken')
 const bcrypt = require('bcrypt')
 
-//To create a Task - POST
- const createUser =async (req,res)=>{
+ const signUp =async (req,res,next)=>{
   const {userName,email,phone,password,ownReferralCode,opReferralCode}=req.body
-  console.log("user signup",userName,email,phone,password,ownReferralCode,opReferralCode)
     try{
       const existingUser = await userModel.findOne({email})
       if (existingUser){
-        console.log("existed")
-        return res.status(409).json({error:'User Already Exists!'})
+        return res.status(409).json({message:'User Already Exists!',success:false})
       }
       if (opReferralCode!=''){
-        const user = await userModel.find({ownReferralCode:opReferralCode})
+        const user = await userModel.findOne({ownReferralCode:opReferralCode})
         if (!!user && user!=''){
-          console.log(`hurraayyyy, user signup by using  ${user} referral code!`,)
+          next()
         }else{
          return res.status(404).json({message:'Provided Referral Code not Exists',success:false,user})
         }
@@ -28,30 +25,32 @@ const bcrypt = require('bcrypt')
         })
         res.status(201).json({message:'User Signed up Successfully',success:true,user})
 
-      }catch(e){
+      }catch(e) {
       if (e.code == 11000){
-        res.status(409).json({error:`${Object.keys(e.keyValue)} field duplicated!`})
+        res.status(409).json({message:`${Object.keys(e.keyValue)} not available!`,success:false})
         return
       }
-        res.status(400).json({
-            error:e.message
+        res.status(500).json({
+            message:e.message,
+            success:false
         })
     }
 }
 
 
 const login= async (req,res,next)=>{
-  console.log("login")
 try{
   const { email, password } = req.body;
+  console.log("on login: ",email,password)
   const user = await userModel.findOne({ email });
-  console.log("user",user)
+
   if(!user){
-    return res.status(404).json({message:'Incorrect password or email' }) 
+    return res.status(404).json({message:'Incorrect password or email',success:false }) 
   }
+
   const auth = await bcrypt.compare(password,user.password)
   if (!auth) {
-    return res.status(404).json({message:'Incorrect password or email' }) 
+    return res.status(404).json({message:'Incorrect password or email',success:false }) 
   }
   const token = createJSONWebToken(user._id);
   res.cookie("token", token, {
@@ -61,8 +60,8 @@ try{
   res.status(201).json({ message: "User logged in successfully", success: true });
   next()
 }catch(e){
-  console.log('err',e)
-  res.status(400).json({error:e.message})
+  console.log("login error:",e.message)
+  res.status(500).json({message:e.message,success:false})
 }
 }
 
@@ -71,12 +70,12 @@ const getUsers = async (req,res)=>{
     const users = await userModel.find({})
     res.status(200).json(users)
   }catch(e){
-    console.log(e)
-    res.status(400).json({error:e.message})
+    console.log("get users error:",e.message)
+    res.status(500).json({error:e.message})
   }
 }
 
 
 
 
-module.exports = { createUser, getUsers,login}
+module.exports = {  signUp, getUsers,login}

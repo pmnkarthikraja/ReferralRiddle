@@ -11,7 +11,7 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: 'http://192.168.204.199:3000',
     credentials: true
 }));
 
@@ -26,7 +26,12 @@ const connectWithRetry = async () => {
     } catch (error) {
         console.error('Failed to connect to MongoDB:', error.message);
         console.log('Retrying connection in 5 seconds...');
-        setTimeout(connectWithRetry, 5000);
+        return new Promise((resolve)=>{
+            setTimeout(()=>{
+                connectWithRetry()
+                resolve()
+            },5000)
+        })
     }
 };
 
