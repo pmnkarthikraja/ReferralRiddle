@@ -8,6 +8,9 @@ import { UserDetail } from "./dataStructure";
 import { userApi } from "./userApi";
 import ReferralTracking from "./ReferralTracking";
 import RewardsBonus from "./RewardsBonus";
+import LoadingScreen from "./LoadingScreen";
+import axios, { AxiosError } from "axios";
+import ToastErros from "./ToastError";
 
 // const cardStyle: React.CSSProperties = {
 //     backgroundColor: '#fff',
@@ -26,13 +29,14 @@ const cardStyle: React.CSSProperties = {
     textAlign: 'center',
 };
 
-const Home = () => {
+const HomePage = () => {
     const navigate = useNavigate();
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const [visualization, setVisualization] = useState<boolean>(false)
     const [referralTracking, setReferralTracking] = useState<boolean>(false)
     const [bonusPage, setBonusPage] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [apiError,setApiError] = useState<AxiosError>()
     const [user, setUser] = useState<UserDetail>({
         email: '',
         password: '',
@@ -44,7 +48,9 @@ const Home = () => {
 
     useEffect(() => {
         const verifyCookie = async () => {
-            setIsLoading(true)
+            try{
+                setApiError(undefined)
+                setIsLoading(true)
             const { data } = await userApi.authUser()
             const { status, user } = data;
             setIsLoading(false)
@@ -54,6 +60,11 @@ const Home = () => {
             if (!status) {
                 removeCookie('token')
                 navigate("/login")
+            } 
+            }catch(e){
+                if (axios.isAxiosError(e)){
+                    setApiError(e)
+                }
             }
         };
         verifyCookie();
@@ -65,19 +76,15 @@ const Home = () => {
     };
 
     if (isLoading) {
-        return <>
-            <EuiSpacer size='xxl' />
-            <EuiFlexGroup justifyContent='spaceEvenly'>
-                <EuiFlexItem grow={false}>
-                    <EuiLoadingLogo size='xl' logo="logoObservability" /> Loading...
-                </EuiFlexItem>
-            </EuiFlexGroup>
+        return <><LoadingScreen/>
+        {apiError && <ToastErros errors={[apiError]}/>}
         </>
-
     }
     return (
         <React.Fragment>
             <EuiPage paddingSize='l' direction='row' >
+            {apiError && <ToastErros errors={[apiError]}/>}
+
                 <EuiPageSidebar
                     paddingSize="l" hasEmbellish>
                     <EuiTitle><p>User Dashboard</p></EuiTitle>
@@ -166,7 +173,7 @@ const Home = () => {
                                                     <p>Invite your friends to join and earn rewards!</p>
                                                 </EuiText>
                                                 <EuiSpacer size="s" />
-                                                <EuiButton fill color="primary">Refer Now</EuiButton>
+                                                <EuiButton fill color="primary" onClick={()=>{}}>Refer Now</EuiButton>
                                             </div>
                                         </EuiFlexItem>
                                         <EuiFlexItem>
@@ -190,4 +197,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default HomePage;

@@ -1,8 +1,8 @@
-import { FunctionComponent, useEffect, useState } from "react"
+import { EuiBasicTableColumn, EuiButton, EuiButtonEmpty, EuiCallOut, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiForm, EuiIcon, EuiInMemoryTable, EuiModal, EuiModalBody, EuiModalFooter, EuiModalHeader, EuiModalHeaderTitle, EuiSpacer, EuiTableSelectionType, EuiText } from "@elastic/eui"
+import { FunctionComponent, useState } from "react"
 import { EmailStruct, UserDetail } from "./dataStructure"
-import {  EuiBasicTableColumn, EuiButton, EuiButtonEmpty, EuiCallOut, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiForm, EuiFormRow, EuiIcon, EuiInMemoryTable, EuiModal, EuiModalBody, EuiModalFooter, EuiModalHeader, EuiModalHeaderTitle, EuiSpacer, EuiTableSelectionType, EuiText } from "@elastic/eui"
-import { useEmail } from "./useEmail"
 import { emailApi } from "./emailApi"
+import { useEmail } from "./useEmail"
 
 export interface ShareReferralProps {
     user: UserDetail
@@ -57,7 +57,6 @@ const ShareReferral: FunctionComponent<ShareReferralProps> = ({
         initialSelected: [],
       };
 
-    console.log("custom mail ",customMail)
     return <>
 
         <EuiButtonEmpty onClick={() => { setModalOpen(true) }}>Share Referral Code</EuiButtonEmpty>
@@ -88,7 +87,6 @@ const ShareReferral: FunctionComponent<ShareReferralProps> = ({
                     <EuiFieldText disabled={selection.length>0} onChange={(e)=>{
                         setCustomMail(e.target.value)
                     }
-                        
                         } placeholder="Enter Email.."  compressed fullWidth></EuiFieldText>
                     </EuiFlexItem>
                     <EuiFlexItem grow={false}>

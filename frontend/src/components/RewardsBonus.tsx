@@ -40,11 +40,9 @@ if (isLoading){
 const successCount = trackageData.filter(r=>r.status=='Success').length
 
   return (
-   <>welcome to RewardsBonus
+   <>
    <RewardCollectionPage rewardAmount={successCount*50} successfulReferrals={successCount} />
    {paperShower && <PaperShower/>}
-   {/* <EuiText>{successCount} user signed out by using your referral code {currentUser.ownReferralCode}</EuiText>
-   {successCount*50} you earned! */}
    </>
   );
 };

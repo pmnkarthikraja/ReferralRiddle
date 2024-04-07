@@ -2,6 +2,8 @@ import { EuiBasicTable, EuiBasicTableColumn, EuiButton, EuiButtonEmpty, EuiCopy,
 import { EmailWithReferee, Referee } from "./emailApi"
 import { useEmail } from "./useEmail"
 import ToastErrors from "./ToastError";
+import LoadingScreen from "./LoadingScreen";
+import React from "react";
 
 
 
@@ -49,17 +51,17 @@ const columns = [
 
 
 
-const FriendsEmails = () => {
+const FriendsEmailsPage = () => {
     const {emails,apiError,loading} = useEmail()
     const items: EmailWithReferee[] = emails.map(email => {
         return email
     })
 
     if (loading){
-        return  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <EuiLoadingChart size="xl" />  
+        return  <React.Fragment>
+        <LoadingScreen />
         {!!apiError && <ToastErrors errors={[apiError]} />}
-      </div>
+        </React.Fragment> 
     }
 
     return <>
@@ -86,4 +88,4 @@ const FriendsEmails = () => {
     </>
 }
 
-export default FriendsEmails
+export default FriendsEmailsPage
