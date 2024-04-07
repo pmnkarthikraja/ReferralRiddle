@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { EmailStruct } from "./dataStructure";
 
-interface Referee{
+export interface Referee{
   email:string,
   referralCode:string
 }
@@ -23,7 +23,7 @@ export interface EmailAPI{
 }
 
 
-const BASE_URL = 'http://localhost:4000/api/users'
+const BASE_URL = 'http://192.168.204.199:4000/api/users'
 
 class EmailAPIService implements EmailAPI{
   async  getEmails () : Promise<{data:HandleEmailDetails}>{

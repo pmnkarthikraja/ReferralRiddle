@@ -21,10 +21,8 @@ export function useUsers():UseUsersReturn {
                 console.log("error on getting users")
              } 
         }
-
         getUsers()
 },[])
-    
     return {
         isLoading,
         userDetails

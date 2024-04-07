@@ -3,7 +3,7 @@ export interface UserDetail{
     email:string,
     phone:string,
     password:string,
-    ownReferralCode:string,
+    ownReferralCode?:string,
     opReferralCode?:string,
 }
 
@@ -16,7 +16,7 @@ export interface EmailStruct{
     address:string,
 }
 
-export const referralCodePattern = /^\d{2}[a-z]{2}[A-Z]{2}\d{2}$/;
+// export const referralCodePattern = /^\d{2}[a-z]{2}[A-Z]{2}\d{2}$/;
 
 
 //define referral code

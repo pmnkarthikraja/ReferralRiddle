@@ -4,6 +4,7 @@ import { useUsersTracking } from './useUsersTracking';
 import { useUsers } from './useUsers';
 import { UserDetail } from './dataStructure';
 import { EuiSpacer, EuiFlexGroup, EuiFlexItem, EuiLoadingLogo, EuiText } from '@elastic/eui';
+import RewardCollectionPage from './RewareCollectionPage';
 
 export interface RewardsBonusProps{
     currentUser:UserDetail
@@ -40,9 +41,10 @@ const successCount = trackageData.filter(r=>r.status=='Success').length
 
   return (
    <>welcome to RewardsBonus
+   <RewardCollectionPage rewardAmount={successCount*50} successfulReferrals={successCount} />
    {paperShower && <PaperShower/>}
-   <EuiText>{successCount} user signed out by using your referral code {currentUser.ownReferralCode}</EuiText>
-   {successCount*50} you earned!
+   {/* <EuiText>{successCount} user signed out by using your referral code {currentUser.ownReferralCode}</EuiText>
+   {successCount*50} you earned! */}
    </>
   );
 };
