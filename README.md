@@ -2,8 +2,7 @@
 2. Project Description: The Referral Program System is a web application designed to facilitate user referrals and incentivize participation through rewards. The system allows users to register, generate unique referral codes, track successful referrals, and potentially earn rewards for their referrals. This project aims to implement a robust referral program mechanism akin to those utilized by companies like Uber, where both the referrer and the new user benefit from the referral process.
 
 --Technologies Used--
-
-1. Frontend :-
+Frontend :-
  
 1. React.js: JavaScript library for building user interfaces.
 2. Elastic UI: A React UI framework for building beautiful and accessible websites.
@@ -14,7 +13,7 @@
 7. React Hook Form: A library for managing form state and validation in React applications.
 8. Lint: Used for code clearance and maintaining code quality.
 
-2. Backend :-
+Backend :-
    
 1. Node.js: JavaScript runtime environment for building server-side applications.
 2. Express.js: Web application framework for Node.js.
