@@ -1,8 +1,9 @@
-import { EuiBasicTableColumn, EuiButton, EuiFlexGroup, EuiFlexItem, EuiHealth, EuiInMemoryTable, EuiPanel, EuiProgress, EuiSkeletonCircle, EuiSkeletonLoading, EuiSkeletonRectangle, EuiSkeletonText, EuiSkeletonTitle, EuiSpacer, EuiText, EuiTitle } from "@elastic/eui"
+import { EuiBasicTableColumn, EuiButton, EuiFlexGroup, EuiFlexItem, EuiHealth, EuiInMemoryTable, EuiPanel, EuiProgress, EuiProvider, EuiSkeletonCircle, EuiSkeletonLoading, EuiSkeletonRectangle, EuiSkeletonText, EuiSkeletonTitle, EuiSpacer, EuiText, EuiTitle } from "@elastic/eui"
 import { FunctionComponent } from "react"
 import { UserDetail } from "./dataStructure"
 import { useUsers } from "./useUsers"
 import { useUsersTracking } from "./useUsersTracking"
+import { useGetUsers } from "./hooks"
 
 export interface ReferralTrackingProps {
     user: UserDetail
@@ -63,14 +64,16 @@ const columns: Array<EuiBasicTableColumn<ReferralTrack>> = [{
 const ReferralTracking: FunctionComponent<ReferralTrackingProps> = ({
     user
 }) => {
-    const { isLoading, userDetails } = useUsers()
-    const referralTracks = useUsersTracking(user,userDetails)
+    const {data,isLoading,isFetching} = useGetUsers()
+    // const { isLoading, userDetails } = useUsers()
+    const referralTracks = useUsersTracking(user)
 
     return <>
+    <EuiProvider>
         <EuiTitle><h2>Tracking Users</h2></EuiTitle>
-        {isLoading && <EuiProgress size="xs" color="accent" />}
+        {(isLoading ) && <EuiProgress size="xs" color="accent" />}
         <EuiSkeletonLoading loadedContent={
-            <EuiInMemoryTable compressed columns={columns} items={referralTracks} />
+            <EuiInMemoryTable pagination={true} compressed columns={columns} items={referralTracks} />
         } loadingContent={
             <EuiPanel>
                 <EuiFlexGroup alignItems="center" gutterSize="s" responsive={false}>
@@ -91,7 +94,8 @@ const ReferralTracking: FunctionComponent<ReferralTrackingProps> = ({
                     </EuiFlexItem>
                 </EuiFlexGroup>
             </EuiPanel>
-        } isLoading={isLoading} />
+            
+        } isLoading={isLoading} /></EuiProvider>
     </>
 }
 export default ReferralTracking

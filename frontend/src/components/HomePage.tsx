@@ -10,17 +10,6 @@ import ReferralTracking from "./ReferralTracking";
 import RewardsBonus from "./RewardsBonus";
 import LoadingScreen from "./LoadingScreen";
 import axios, { AxiosError } from "axios";
-import ToastErros from "./ToastError";
-
-// const cardStyle: React.CSSProperties = {
-//     backgroundColor: '#fff',
-//     borderRadius: '8px',
-//     boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.1)',
-//     padding: '20px',
-//     textAlign: 'center',
-//     width: '300px',
-//     margin: '0 auto',
-// };
 
 const cardStyle: React.CSSProperties = {
     backgroundColor: '#f5f5f5',
@@ -64,6 +53,8 @@ const HomePage = () => {
             }catch(e){
                 if (axios.isAxiosError(e)){
                     setApiError(e)
+                    removeCookie('token')
+                    navigate("/login")
                 }
             }
         };
@@ -77,13 +68,14 @@ const HomePage = () => {
 
     if (isLoading) {
         return <><LoadingScreen/>
-        {apiError && <ToastErros errors={[apiError]}/>}
+        {/* {apiError && <ToastErros errors={[apiError]}/>} */}
+
         </>
     }
     return (
         <React.Fragment>
             <EuiPage paddingSize='l' direction='row' >
-            {apiError && <ToastErros errors={[apiError]}/>}
+            {/* {apiError && <ToastErros errors={[apiError]}/>} */}
 
                 <EuiPageSidebar
                     paddingSize="l" hasEmbellish>

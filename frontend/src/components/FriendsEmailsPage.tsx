@@ -1,9 +1,11 @@
-import { EuiBasicTable, EuiBasicTableColumn, EuiButton, EuiButtonEmpty, EuiCopy, EuiFlexGroup, EuiFlexItem, EuiHeaderLink, EuiHealth, EuiIcon, EuiLink, EuiLoadingChart, EuiPage, EuiPageBody, EuiPageSection, EuiProgress, EuiSpacer, EuiText, EuiTitle } from "@elastic/eui"
+import { EuiBasicTable, EuiBasicTableColumn, EuiButton, EuiButtonEmpty, EuiCopy, EuiFlexGroup, EuiFlexItem, EuiHeaderLink, EuiHealth, EuiIcon, EuiInMemoryTable, EuiLink, EuiLoadingChart, EuiPage, EuiPageBody, EuiPageSection, EuiProgress, EuiProvider, EuiSpacer, EuiText, EuiTitle } from "@elastic/eui"
 import { EmailWithReferee, Referee } from "./emailApi"
 import { useEmail } from "./useEmail"
 import ToastErrors from "./ToastError";
 import LoadingScreen from "./LoadingScreen";
 import React from "react";
+import { useGetEmails } from "./hooks";
+import AxiosErrorToast from "./ToastError";
 
 
 
@@ -13,10 +15,10 @@ const columns = [
         name: 'Friend\'s Email Address', // Updated column name
         sortable: true,
         render: (address: string) => 
-        <>
-        <EuiIcon size='l' type='email' /> 
-        <EuiLink href="#" style={{textDecoration:'none'}} color='success'>{address}</EuiLink>
-            </>
+        <React.Fragment>
+        <EuiIcon size='l' type='email' />
+        <EuiLink href="#" style={{textDecoration:'none',marginLeft:'10px'}} color='success'>{address}</EuiLink>
+            </React.Fragment>
     },
     {
         name: "Referees",
@@ -34,7 +36,7 @@ const columns = [
                                 <EuiFlexItem>
                                     <EuiCopy textToCopy={ref.referralCode}>
                                         {(copy) => (
-                                            <EuiButton size="s" fill color="success" onClick={copy}>{ref.referralCode}</EuiButton>
+                                            <EuiButton size="s"  color="success" onClick={copy}>{ref.referralCode}</EuiButton>
                                         )}
                                     </EuiCopy>
                                 </EuiFlexItem>
@@ -52,20 +54,20 @@ const columns = [
 
 
 const FriendsEmailsPage = () => {
-    const {emails,apiError,loading} = useEmail()
-    const items: EmailWithReferee[] = emails.map(email => {
+    const {data:allEmails,isLoading,isError,error} = useGetEmails()
+    const items: EmailWithReferee[] | undefined = allEmails?.map(email => {
         return email
-    })
+    }) 
 
-    if (loading){
+    if (isLoading){
         return  <React.Fragment>
         <LoadingScreen />
-        {!!apiError && <ToastErrors errors={[apiError]} />}
+        {error && <AxiosErrorToast error={error} />}
         </React.Fragment> 
     }
 
     return <>
-    {!!apiError && <ToastErrors errors={[apiError]} />}
+    {isError && error && <AxiosErrorToast error={error} />}
         <EuiPage restrictWidth>
             <EuiPageBody>
                 <EuiPageBody verticalPosition="center" horizontalPosition="center">
@@ -76,8 +78,8 @@ const FriendsEmailsPage = () => {
                         </EuiTitle>
                         <EuiIcon type="logoElastic" size="xxl" />
                        
-                        <EuiBasicTable
-                            items={items}
+                        <EuiInMemoryTable
+                            items={items||[]}
                             columns={columns}
                             compressed={true}
                         />

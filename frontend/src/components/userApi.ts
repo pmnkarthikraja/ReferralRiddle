@@ -8,7 +8,7 @@ authUser:()=>Promise<AxiosResponse>
 getUsers:()=>Promise<AxiosResponse<UserDetail[],any>>
 }
 
-const BASE_URL = 'http://192.168.204.199:4000/api/users'
+const BASE_URL = 'http://localhost:4000/api/users'
 
 class UserAPIService implements UserAPI{
     async onRegister (userDetails: UserDetail):Promise<AxiosResponse>{

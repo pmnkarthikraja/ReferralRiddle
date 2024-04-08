@@ -4,6 +4,9 @@ import { UserDetail, UserLogin } from './dataStructure'
 
 const emailRefinement= refine(string(),'Email',(value)=>{
     const emailPattern =/^\s*\S+@\S+(\.\S{2,3})+\s*$/
+    if (value==''){
+        return true
+    }
     if (!emailPattern.test(value)){
         return `Please Enter a valid Email Address!`
     }
@@ -12,6 +15,9 @@ const emailRefinement= refine(string(),'Email',(value)=>{
 
 const referralCodeRefinement = refine(string(),'Referral Code',(value)=>{
     const referralPattern = /^\d{2}[a-z]{2}[A-Z]{2}\d{2}$/
+    if (value==''){
+        return true
+    }
     if (!referralPattern.test(value)){
         return `Referral code should be 2 digits, 2 lowercase letters, 2 uppercase letters, and 2 digits. For example, 12abCD34.`
     }
@@ -20,6 +26,9 @@ const referralCodeRefinement = refine(string(),'Referral Code',(value)=>{
 
 const phoneRefinement = refine(string(),'Referral Code',(value)=>{
     const phonePattern = /^\+?[1-9]\d{1,14}$/
+    if (value==''){
+        return ''
+    }
     if (!phonePattern.test(value)){
         return `Please Enter a valid Phone Number!`
     }

@@ -15,7 +15,7 @@ const RewardsBonus: FunctionComponent<RewardsBonusProps> = ({
 }) => {
     const [paperShower,setPaperShower]=useState<boolean>(true)
     const {isLoading,userDetails} = useUsers()
-    const trackageData = useUsersTracking(currentUser,userDetails)
+    // const trackageData = useUsersTracking(currentUser,userDetails)
 
 useEffect(()=>{
     setTimeout(()=>{
@@ -37,7 +37,8 @@ if (isLoading){
 }
 
 
-const successCount = trackageData.filter(r=>r.status=='Success').length
+// const successCount = trackageData.filter(r=>r.status=='Success').length
+const successCount = 0
 
   return (
    <>
