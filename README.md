@@ -49,6 +49,46 @@ Optional Features:
 Reward Functionality: Implement functionality to reward users for successful referrals, such as providing cash incentives.
 User Authentication (Login): Enhance security by implementing user authentication mechanisms.
 
+package.json Frontend dependencies:
+  "dependencies": {
+    "@elastic/datemath": "^5.0.3",
+    "@elastic/eui": "^93.5.2",
+    "@emotion/css": "^11.11.2",
+    "@emotion/react": "^11.11.4",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@types/chart.js": "^2.9.41",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.13",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "chart.js": "^4.4.2",
+    "moment": "^2.30.1",
+    "react": "^18.2.0",
+    "react-cookie": "^7.1.4",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.2",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^6.22.3",
+    "react-scripts": "5.0.1",
+    "superstruct": "^1.0.4",
+    "typescript": "^4.4.2",
+    "web-vitals": "^2.1.0"
+  },
+
+package.json Backend dependencies:-
+"dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.4"
+  }
+
+
 Lets Get Started..
 
 ------Installation:-----
