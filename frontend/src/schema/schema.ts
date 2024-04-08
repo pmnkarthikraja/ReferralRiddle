@@ -5,7 +5,7 @@ import { UserDetail, UserLogin } from './dataStructure'
 export const emailRefinement= refine(string(),'Email',(value)=>{
     const emailPattern =/^\s*\S+@\S+(\.\S{2,3})+\s*$/
     if (value===''){
-        return true
+        return `Email Should not be empty!`
     }
     if (!emailPattern.test(value)){
         return `Please Enter a valid Email Address!`

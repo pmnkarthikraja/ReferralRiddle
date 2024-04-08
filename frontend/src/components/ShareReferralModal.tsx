@@ -32,7 +32,7 @@ const ShareReferralModal: FunctionComponent<ShareReferralProps> = ({
         }
         }) || []
 
-        const {mutateAsync:sendEmailMutation,isLoading,isError,error} = useSendEmailMutation()
+        const {mutateAsync:sendEmailMutation,isLoading,isPaused,isError,error} = useSendEmailMutation()
 
     const sendEmail = async (custom: boolean) => {
         try {
@@ -70,6 +70,7 @@ const ShareReferralModal: FunctionComponent<ShareReferralProps> = ({
         setSelection([])
         setSuccessMsg('')
         setCustomMail('')
+        setFailures([])
     }
 
     return <React.Fragment>
@@ -78,7 +79,7 @@ const ShareReferralModal: FunctionComponent<ShareReferralProps> = ({
 
         {isModalOpen && <EuiModal onClose={onClose}>
             {successMsg != '' && <EuiCallOut color='success'>{successMsg}</EuiCallOut>}
-            {isError && error && <EuiCallOut title="Oops!" color="danger">{error.response?.data.message || 'Network Error'}</EuiCallOut>}
+            {isError && error && !isPaused && <EuiCallOut title="Oops!" color="danger">{error.response?.data.message || 'Network Error'}</EuiCallOut>}
             {failures.length>0 && <EuiCallOut color="warning"><EuiFormErrorText>{failures[0].message}</EuiFormErrorText></EuiCallOut>}
             {isLoading &&<LoadingIcon/>}
             <EuiModalHeader>
