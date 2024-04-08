@@ -4,7 +4,6 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
 const emailRoutes = require('./routes/emailRoutes');
-const { EmailSchema } = require('./models/MailModel');
 
 require('dotenv').config();
 
@@ -34,33 +33,6 @@ const connectWithRetry = async () => {
     }
 };
 
-const insertInitialEmails = async () => {
-    //for initially set friends emails, even though we can add email from ui
-    const friendsEmail = [
-        { address: "one@gmail.com" },
-        { address: "two@gmail.com" },
-        { address: "three@gmail.com" },
-        { address: "four@gmail.com" },
-        { address: "five@gmail.com" },
-    ];
-
-    for (const email of friendsEmail) {
-        try {
-            const existingEmail = await EmailSchema.findOne({ address: email.address });
-            if (!existingEmail) {
-                await EmailSchema.create({
-                    address: email.address,
-                    referees: []
-                });
-                console.log(`Email ${email.address} inserted successfully`);
-            } else {
-                console.log(`Email ${email.address} already exists, skipping insertion`);
-            }
-        } catch (error) {
-            console.error(`Error inserting email ${email.address}:`, error);
-        }
-    }
-};
 
 mongoose.connection.on('error', (err) => {
     console.error('MongoDB connection error:', err);
@@ -75,7 +47,6 @@ const startServer = () => {
     app.listen(process.env.PORT, () => {
         console.log(`Server started listening on port ${process.env.PORT}`);
         serverStarted=true
-        insertInitialEmails();
     });
 };
 

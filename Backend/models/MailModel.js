@@ -6,12 +6,10 @@ const refereeSchema = new mongoose.Schema({
     email: {
       type: String,
       required: true,
-      unique: true
     },
     referralCode: {
       type: String,
       required: true,
-      unique: true
     }
   });
 

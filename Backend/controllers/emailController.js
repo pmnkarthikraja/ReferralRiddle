@@ -48,6 +48,7 @@ const updateEmailWithReferees = async (req, res) => {
         }
         res.status(200).json({ message: 'successfully emails sent..',success:true });
     } catch (e) {
+        console.log("error",e)
         res.status(500).json({ message: 'Internal server error',success:false });
     }
 }
