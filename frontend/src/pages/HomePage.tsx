@@ -50,10 +50,13 @@ const HomePage = () => {
       verifyCookie();
     }, [cookies, navigate, removeCookie]);
 
-    if (isError && error){
-        removeCookie("token");
-        navigate("/login");
-    }
+
+    useEffect(() => {
+        if (isError && error) {
+          removeCookie("token");
+          navigate("/login");
+        }
+      }, [isError, error, navigate, removeCookie]);
 
     const doLogout = () => {
         removeCookie("token");
