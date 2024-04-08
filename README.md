@@ -5,25 +5,25 @@
 
 1. Frontend :-
  
-React.js: JavaScript library for building user interfaces.
-Elastic UI: A React UI framework for building beautiful and accessible websites.
-Superstruct: A library for creating fast and type-safe data structures in JavaScript.
-Tanstack Query: A data-fetching library for managing asynchronous data in React applications. It's used for asynchronous state management and is preferred over Redux for its avoidance of boilerplate code.
-TypeScript: A typed superset of JavaScript that compiles to plain JavaScript.
-Chart.js: A JavaScript library for creating charts, including line, bar, and pie charts.
-React Hook Form: A library for managing form state and validation in React applications.
-Lint: Used for code clearance and maintaining code quality.
+1. React.js: JavaScript library for building user interfaces.
+2. Elastic UI: A React UI framework for building beautiful and accessible websites.
+3. Superstruct: A library for creating fast and type-safe data structures in JavaScript.
+4. Tanstack Query: A data-fetching library for managing asynchronous data in React applications. It's used for asynchronous state management and is preferred over Redux for its avoidance of boilerplate code.
+5. TypeScript: A typed superset of JavaScript that compiles to plain JavaScript.
+6. Chart.js: A JavaScript library for creating charts, including line, bar, and pie charts.
+7. React Hook Form: A library for managing form state and validation in React applications.
+8. Lint: Used for code clearance and maintaining code quality.
 
 2. Backend :-
    
-Node.js: JavaScript runtime environment for building server-side applications.
-Express.js: Web application framework for Node.js.
-Mongoose: MongoDB object modeling for Node.js.
-MongoDB Atlas: Cloud-based MongoDB service.
-JWT (JSON Web Tokens): Used for user authentication.
-Bcrypt: Library for hashing passwords.
-dotenv: Loads environment variables from a .env file into process.env.
-Cors: Middleware for enabling Cross-Origin Resource Sharing.
+1. Node.js: JavaScript runtime environment for building server-side applications.
+2. Express.js: Web application framework for Node.js.
+3. Mongoose: MongoDB object modeling for Node.js.
+4. MongoDB Atlas: Cloud-based MongoDB service.
+5. JWT (JSON Web Tokens): Used for user authentication.
+6. Bcrypt: Library for hashing passwords.
+7. dotenv: Loads environment variables from a .env file into process.env.
+8. Cors: Middleware for enabling Cross-Origin Resource Sharing.
 
 
 --Additional Features--
