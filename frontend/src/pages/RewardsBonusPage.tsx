@@ -15,7 +15,7 @@ const RewardsBonusPage: FunctionComponent<RewardsBonusProps> = ({
 }) => {
     const [paperShower,setPaperShower]=useState<boolean>(true)
     const {referralTracks,isEmailsLoading,isUsersLoading} = useUsersTracking(currentUser)    
-    const {data} = useGetUsers(3000)
+    const {data} = useGetUsers()
 
 useEffect(()=>{
     setTimeout(()=>{

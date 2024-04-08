@@ -1,8 +1,8 @@
-import Chart, { registerables } from 'chart.js/auto';
-import React, { FunctionComponent, useEffect, useRef } from "react";
-import { UserDetail } from '../schema/dataStructure';
-import { useUsersTracking } from '../hooks/useUsersTracking';
 import { EuiFlexGroup, EuiFlexItem, EuiSpacer } from '@elastic/eui';
+import Chart from 'chart.js/auto';
+import React, { FunctionComponent, useEffect, useRef } from "react";
+import { useUsersTracking } from '../hooks/useUsersTracking';
+import { UserDetail } from '../schema/dataStructure';
 
 const ReferralStatisticsPage: FunctionComponent<{ currentUser: UserDetail }> = ({
     currentUser

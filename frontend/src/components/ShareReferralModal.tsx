@@ -24,7 +24,7 @@ const ShareReferralModal: FunctionComponent<ShareReferralProps> = ({
     const [customMail,setCustomMail]=useState<string>('')
     const [successMsg,setSuccessMsg] = useState<string>('')
     const [failures,setFailures]=useState<Failure[]>([])
-    const emailsQuery = useGetEmails(2000)
+    const emailsQuery = useGetEmails()
 
         const items: EmailStruct[] = emailsQuery.data?.map(email => {
         return {

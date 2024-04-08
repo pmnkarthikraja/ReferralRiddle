@@ -1,5 +1,5 @@
 import { EuiBasicTableColumn, EuiButton, EuiFlexGroup, EuiFlexItem, EuiHealth, EuiInMemoryTable, EuiPanel, EuiProgress, EuiProvider, EuiSkeletonCircle, EuiSkeletonLoading, EuiSkeletonRectangle, EuiSkeletonText, EuiSkeletonTitle, EuiSpacer, EuiText, EuiTitle } from "@elastic/eui"
-import { FunctionComponent } from "react"
+import React, { FunctionComponent } from "react"
 import { UserDetail } from "../schema/dataStructure"
 import { useUsersTracking } from "../hooks/useUsersTracking"
 
@@ -42,7 +42,7 @@ const columns: Array<EuiBasicTableColumn<ReferralTrack>> = [{
 }, {
     name: 'Description',
     render: (refTrack: ReferralTrack) =>
-        <>
+        <React.Fragment>
             {
                 refTrack.status == 'Success' &&
                 <EuiText color='success' size="s" >User Signed up by using your referral code</EuiText>
@@ -55,16 +55,16 @@ const columns: Array<EuiBasicTableColumn<ReferralTrack>> = [{
                 refTrack.status == 'Failed' &&
                 <EuiText color='success' size="s" >User Signed up by without your referral code</EuiText>
             }
-        </>
+        </React.Fragment>
 
 }]
 
 const ReferralTrackingPage: FunctionComponent<ReferralTrackingProps> = ({
     user
 }) => {
-    const { referralTracks, isEmailsLoading, isUsersLoading } = useUsersTracking(user, 2000)
+    const { referralTracks, isEmailsLoading, isUsersLoading } = useUsersTracking(user)
 
-    return <>
+    return <React.Fragment>
             <EuiTitle><h2>Tracking Users</h2></EuiTitle>
             {(isEmailsLoading || isUsersLoading) && <EuiProgress size="xs" color="accent" />}
             <EuiSkeletonLoading loadedContent={
@@ -91,6 +91,6 @@ const ReferralTrackingPage: FunctionComponent<ReferralTrackingProps> = ({
                 </EuiPanel>
 
             } isLoading={isEmailsLoading || isUsersLoading} />
-    </>
+    </React.Fragment>
 }
 export default ReferralTrackingPage
