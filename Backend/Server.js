@@ -11,31 +11,31 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({
-    origin: 'http://192.168.204.199:3000',
+    origin: 'http://localhost:3000',
     credentials: true
 }));
 
 app.use(cookieParser());
 app.use(express.json());
 
+let serverStarted = false
+
 const connectWithRetry = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI);
         console.log('Connected to MongoDB');
-        startServer();
+        if (!serverStarted){
+            startServer();
+        }
     } catch (error) {
         console.error('Failed to connect to MongoDB:', error.message);
         console.log('Retrying connection in 5 seconds...');
-        return new Promise((resolve)=>{
-            setTimeout(()=>{
-                connectWithRetry()
-                resolve()
-            },5000)
-        })
+       setTimeout(connectWithRetry,5000)
     }
 };
 
 const insertInitialEmails = async () => {
+    //for initially set friends emails, even though we can add email from ui
     const friendsEmail = [
         { address: "one@gmail.com" },
         { address: "two@gmail.com" },
@@ -74,6 +74,7 @@ mongoose.connection.on('disconnected', () => {
 const startServer = () => {
     app.listen(process.env.PORT, () => {
         console.log(`Server started listening on port ${process.env.PORT}`);
+        serverStarted=true
         insertInitialEmails();
     });
 };

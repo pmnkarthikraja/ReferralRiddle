@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt')
 
 const Schema = mongoose.Schema
 
-//id will automatically create
-
 //user registration schema
 const UserSchema = new Schema({
     userName:{
@@ -40,5 +38,4 @@ UserSchema.pre('save',async function(){
     this.password = await bcrypt.hash(this.password,12)
 })
 
-//create a model
 module.exports = mongoose.model("User",UserSchema)

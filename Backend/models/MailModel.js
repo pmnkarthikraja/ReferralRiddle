@@ -24,7 +24,6 @@ const emailSchema = new Schema({
     referees:[refereeSchema]
 })
 
-//create a model
 const EmailSchema = mongoose.model("Email",emailSchema)
 const RefereeSchema = mongoose.model('Referee', refereeSchema);
 

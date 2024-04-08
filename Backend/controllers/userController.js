@@ -7,14 +7,13 @@ const bcrypt = require('bcrypt')
     try{
       const existingUser = await userModel.findOne({email})
       if (existingUser){
+        console.log("user email exists")
         return res.status(409).json({message:'User Already Exists!',success:false})
       }
       if (opReferralCode!=''){
         const user = await userModel.findOne({ownReferralCode:opReferralCode})
-        if (!!user && user!=''){
-          next()
-        }else{
-         return res.status(404).json({message:'Provided Referral Code not Exists',success:false,user})
+        if (user==undefined || user==''){
+          return res.status(404).json({message:'Provided Referral Code not Exists',success:false,user})
         }
       }
         const user = await userModel.create({userName,email,phone,password,ownReferralCode,opReferralCode})
@@ -23,6 +22,7 @@ const bcrypt = require('bcrypt')
           withCredentials:true,
           httpOnly:false
         })
+        console.log("user successfully signed out!")
         res.status(201).json({message:'User Signed up Successfully',success:true,user})
 
       }catch(e) {
@@ -41,7 +41,6 @@ const bcrypt = require('bcrypt')
 const login= async (req,res,next)=>{
 try{
   const { email, password } = req.body;
-  console.log("on login: ",email,password)
   const user = await userModel.findOne({ email });
 
   if(!user){
