@@ -1,5 +1,5 @@
-Project Name: Riferral riddle
-Project Description: The Referral Program System is a web application designed to facilitate user referrals and incentivize participation through rewards. The system allows users to register, generate unique referral codes, track successful referrals, and potentially earn rewards for their referrals. This project aims to implement a robust referral program mechanism akin to those utilized by companies like Uber, where both the referrer and the new user benefit from the referral process.
+1. Project Name: Riferral riddle
+2. Project Description: The Referral Program System is a web application designed to facilitate user referrals and incentivize participation through rewards. The system allows users to register, generate unique referral codes, track successful referrals, and potentially earn rewards for their referrals. This project aims to implement a robust referral program mechanism akin to those utilized by companies like Uber, where both the referrer and the new user benefit from the referral process.
 
 --Technologies Used--
 
@@ -65,10 +65,10 @@ Lets Get Started..
 5. Install dependencies: npm install or yarn install
 6. create .env file: add below content:
 
-` PORT=4000
- MONGO_URI = mongodb+srv://admin:admin@mern.sfmev1b.mongodb.net/?retryWrites=true&w=majority
- TOKEN_KEY=dfafsfdasfasdf212jkdkma1233kmsdfaf1211n2knkjnk21nkn02989
- `
+` PORT=4000 `
+` MONGO_URI = mongodb+srv://admin:admin@mern.sfmev1b.mongodb.net/?retryWrites=true&w=majority`
+` TOKEN_KEY=dfafsfdasfasdf212jkdkma1233kmsdfaf1211n2knkjnk21nkn02989`
+ 
 7. Start Backend Project: yarn start or npm start
 
 -----Application Usage-------
