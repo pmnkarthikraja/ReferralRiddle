@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { EmailStruct } from "./dataStructure";
+import { EmailStruct } from "../schema/dataStructure";
 
 export interface Referee{
   email:string,
@@ -16,9 +16,16 @@ export interface HandleEmailDetails{
   emails:EmailWithReferee[]
 }
 
+export interface SendEmailPayload{
+  from:string,
+  referralCode:string,
+  addresses:EmailStruct[]
+}
+
+
 export interface EmailAPI{
     getEmails:()=>Promise<{data:HandleEmailDetails}>
-    sendCode:(from:string,referralCode:string,addresses:EmailStruct[])=>Promise<AxiosResponse>
+    sendCode:(payload:SendEmailPayload)=>Promise<AxiosResponse<{message:string,success:boolean}>>
    
 }
 
@@ -31,12 +38,10 @@ class EmailAPIService implements EmailAPI{
     return d
   }
 
-  async sendCode(from:string,referralCode:string,addresses:EmailStruct[]):Promise<AxiosResponse>{
-    console.log("sending ",addresses)
+  async sendCode(payload:SendEmailPayload):Promise<AxiosResponse<{message:string,success:boolean}>>{
+    console.log("sending ",payload)
     const res =  await axios.post(`${BASE_URL}/sendCodeToMails`,{
-      from,
-      addresses,
-      referralCode
+      ...payload
     })
     return res
   }

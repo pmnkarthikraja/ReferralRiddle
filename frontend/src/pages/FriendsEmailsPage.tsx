@@ -1,11 +1,9 @@
-import { EuiBasicTable, EuiBasicTableColumn, EuiButton, EuiButtonEmpty, EuiCopy, EuiFlexGroup, EuiFlexItem, EuiHeaderLink, EuiHealth, EuiIcon, EuiInMemoryTable, EuiLink, EuiLoadingChart, EuiPage, EuiPageBody, EuiPageSection, EuiProgress, EuiProvider, EuiSpacer, EuiText, EuiTitle } from "@elastic/eui"
-import { EmailWithReferee, Referee } from "./emailApi"
-import { useEmail } from "./useEmail"
-import ToastErrors from "./ToastError";
-import LoadingScreen from "./LoadingScreen";
+import { EuiButton, EuiCopy, EuiFlexGroup, EuiFlexItem, EuiIcon, EuiInMemoryTable, EuiLink, EuiPage, EuiPageBody, EuiPageSection, EuiSpacer, EuiText, EuiTitle } from "@elastic/eui";
 import React from "react";
-import { useGetEmails } from "./hooks";
-import AxiosErrorToast from "./ToastError";
+import LoadingScreen from "../components/LoadingScreen";
+import AxiosErrorToast from "../components/ToastError";
+import { EmailWithReferee } from "../api/emailApi";
+import { useGetEmails } from "../hooks/hooks";
 
 
 
@@ -54,7 +52,7 @@ const columns = [
 
 
 const FriendsEmailsPage = () => {
-    const {data:allEmails,isLoading,isError,error} = useGetEmails()
+    const {data:allEmails,isLoading,isError,error} = useGetEmails(3000)
     const items: EmailWithReferee[] | undefined = allEmails?.map(email => {
         return email
     }) 

@@ -3,9 +3,9 @@ import { FunctionComponent, useState } from 'react'
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { Failure, StructError, assert } from "superstruct"
-import { UserLogin } from "./dataStructure"
-import { useLoginMutation } from "./hooks"
-import { userLoginSchema } from "./schema"
+import { UserLogin } from "../schema/dataStructure"
+import { useLoginMutation } from "../hooks/hooks"
+import { userLoginSchema } from "../schema/schema"
 import LoadingScreen from "./LoadingScreen"
 import LoadingIcon from "./LoadingIcon"
 

@@ -1,9 +1,7 @@
 import { EuiBasicTableColumn, EuiButton, EuiFlexGroup, EuiFlexItem, EuiHealth, EuiInMemoryTable, EuiPanel, EuiProgress, EuiProvider, EuiSkeletonCircle, EuiSkeletonLoading, EuiSkeletonRectangle, EuiSkeletonText, EuiSkeletonTitle, EuiSpacer, EuiText, EuiTitle } from "@elastic/eui"
 import { FunctionComponent } from "react"
-import { UserDetail } from "./dataStructure"
-import { useUsers } from "./useUsers"
-import { useUsersTracking } from "./useUsersTracking"
-import { useGetUsers } from "./hooks"
+import { UserDetail } from "../schema/dataStructure"
+import { useUsersTracking } from "../hooks/useUsersTracking"
 
 export interface ReferralTrackingProps {
     user: UserDetail
@@ -61,41 +59,38 @@ const columns: Array<EuiBasicTableColumn<ReferralTrack>> = [{
 
 }]
 
-const ReferralTracking: FunctionComponent<ReferralTrackingProps> = ({
+const ReferralTrackingPage: FunctionComponent<ReferralTrackingProps> = ({
     user
 }) => {
-    const {data,isLoading,isFetching} = useGetUsers()
-    // const { isLoading, userDetails } = useUsers()
-    const referralTracks = useUsersTracking(user)
+    const { referralTracks, isEmailsLoading, isUsersLoading } = useUsersTracking(user, 2000)
 
     return <>
-    <EuiProvider>
-        <EuiTitle><h2>Tracking Users</h2></EuiTitle>
-        {(isLoading ) && <EuiProgress size="xs" color="accent" />}
-        <EuiSkeletonLoading loadedContent={
-            <EuiInMemoryTable pagination={true} compressed columns={columns} items={referralTracks} />
-        } loadingContent={
-            <EuiPanel>
-                <EuiFlexGroup alignItems="center" gutterSize="s" responsive={false}>
-                    <EuiFlexItem grow={false}>
-                        <EuiSkeletonCircle size="s" />
-                    </EuiFlexItem>
-                    <EuiFlexItem>
-                        <EuiSkeletonTitle size="l" />
-                    </EuiFlexItem>
-                </EuiFlexGroup>
-                <EuiSpacer size="s" />
-                <EuiFlexGroup>
-                    <EuiFlexItem>
-                        <EuiSkeletonText lines={5} />
-                    </EuiFlexItem>
-                    <EuiFlexItem>
-                        <EuiSkeletonRectangle width="100%" height={148} />
-                    </EuiFlexItem>
-                </EuiFlexGroup>
-            </EuiPanel>
-            
-        } isLoading={isLoading} /></EuiProvider>
+            <EuiTitle><h2>Tracking Users</h2></EuiTitle>
+            {(isEmailsLoading || isUsersLoading) && <EuiProgress size="xs" color="accent" />}
+            <EuiSkeletonLoading loadedContent={
+                <EuiInMemoryTable pagination={true} compressed columns={columns} items={referralTracks} />
+            } loadingContent={
+                <EuiPanel>
+                    <EuiFlexGroup alignItems="center" gutterSize="s" responsive={false}>
+                        <EuiFlexItem grow={false}>
+                            <EuiSkeletonCircle size="s" />
+                        </EuiFlexItem>
+                        <EuiFlexItem>
+                            <EuiSkeletonTitle size="l" />
+                        </EuiFlexItem>
+                    </EuiFlexGroup>
+                    <EuiSpacer size="s" />
+                    <EuiFlexGroup>
+                        <EuiFlexItem>
+                            <EuiSkeletonText lines={5} />
+                        </EuiFlexItem>
+                        <EuiFlexItem>
+                            <EuiSkeletonRectangle width="100%" height={148} />
+                        </EuiFlexItem>
+                    </EuiFlexGroup>
+                </EuiPanel>
+
+            } isLoading={isEmailsLoading || isUsersLoading} />
     </>
 }
-export default ReferralTracking
+export default ReferralTrackingPage

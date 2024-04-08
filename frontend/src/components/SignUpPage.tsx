@@ -2,10 +2,10 @@ import { EuiButton, EuiButtonEmpty, EuiCallOut, EuiCard, EuiFieldText, EuiFlexGr
 import React, { FunctionComponent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Failure, StructError, assert } from "superstruct"
-import { UserDetail } from "./dataStructure"
+import { UserDetail } from "../schema/dataStructure"
 import { generateRandomReferralCode } from "./generateReferral"
-import { useRegisterMutation } from "./hooks"
-import { userDetailSchema } from "./schema"
+import { useRegisterMutation } from "../hooks/hooks"
+import { userDetailSchema } from "../schema/schema"
 import { useNavigate } from "react-router-dom"
 
 

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { UserDetail, UserLogin } from "./dataStructure";
+import { UserDetail, UserLogin } from "../schema/dataStructure";
 
 export interface UserAPI{
 onRegister:(userDetails:UserDetail)=>Promise<AxiosResponse>
