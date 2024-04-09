@@ -24,6 +24,9 @@ Backend :-
 7. dotenv: Loads environment variables from a .env file into process.env.
 8. Cors: Middleware for enabling Cross-Origin Resource Sharing.
 
+Database:
+1. MongoDB Atlas (cloud)
+
 
 --Additional Features--
 
@@ -109,6 +112,9 @@ Lets Get Started..
 ` TOKEN_KEY=dfafsfdasfasdf212jkdkma1233kmsdfaf1211n2knkjnk21nkn02989`
  
 7. Start Backend Project: yarn start or npm start
+8. It will establish mongoDB connection.
+9. As I given open ip address in the cloud setup 0.0.0.0/0, So you can able to establish connection.
+     
 
 -----Application Usage-------
 1. Visit http://localhost:3000 in your web browser to access the frontend of the Referral Program System.
