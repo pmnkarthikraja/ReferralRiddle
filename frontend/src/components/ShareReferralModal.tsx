@@ -37,7 +37,9 @@ const ShareReferralModal: FunctionComponent<ShareReferralProps> = ({
     const sendEmail = async (custom: boolean) => {
         try {
             if (!!user.ownReferralCode && failures.length==0) {
+                if (customMail != ''){
                 await assert(customMail,emailRefinement)
+                }
                 const payload = custom ? [{ address: customMail }] : selection;
                 await sendEmailMutation({from:user.email,referralCode:user.ownReferralCode,addresses:payload});
                 setSelection([]);
