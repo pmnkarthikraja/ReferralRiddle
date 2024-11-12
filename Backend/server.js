@@ -10,7 +10,7 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({
-    origin: 'http://184.72.210.250',
+    origin: 'http://3.89.33.147',
     credentials: true
 }));
 
