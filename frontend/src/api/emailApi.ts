@@ -30,7 +30,7 @@ export interface EmailAPI{
 }
 
 
-const BASE_URL = 'http://localhost:4000/api/users'
+const BASE_URL = 'http://3.89.33.147/api/users'
 
 class EmailAPIService implements EmailAPI{
   async  getEmails () : Promise<{data:HandleEmailDetails}>{
